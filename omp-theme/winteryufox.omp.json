@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "final_space": true,
   "version": 3,
@@ -74,7 +74,7 @@
       "segments": [
         {
           "type": "sysinfo",
-          "foreground": "#ffffff",
+          "foreground": "#E7DE29",
           "template": "[Cpu: {{ round .PhysicalPercentUsed .Precision }}%]",
           "properties": {
             "precision": 2
@@ -83,7 +83,7 @@
         },
         {
           "type": "sysinfo",
-          "foreground": "#ffffff",
+          "foreground": "#5EDF01",
           "template": "[RAM: {{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1048576.0) }}/{{ (div .PhysicalTotalMemory 1048576.0) }}MB({{round .PhysicalPercentUsed .Precision}}%)]",
           "properties": {},
           "style": "diamond"
@@ -136,8 +136,8 @@
         {
           "type": "angular",
           "style": "powerline",
-          "foreground": "#000000",
-          "template": "[ {{ .Full }}]"
+          "foreground": "#ffffff",
+          "template": "[Angular  {{ .Full }}]"
         },
         {
           "type": "argocd",
@@ -230,8 +230,8 @@
         {
           "type": "npm",
           "style": "powerline",
-          "foreground": "#193549",
-          "template": "[ {{ .Full }}]"
+          "foreground": "#29EC2F",
+          "template": "[npm {{ .Full }}]"
         },
         {
           "type": "nx",
@@ -242,8 +242,8 @@
         {
           "type": "pnpm",
           "style": "powerline",
-          "foreground": "#000000",
-          "template": "[󰋁 {{ .Full }}]"
+          "foreground": "#E08A12",
+          "template": "[Pnpm 󰋁 {{ .Full }}]"
         },
         {
           "type": "quasar",
@@ -255,13 +255,13 @@
           "type": "react",
           "style": "powerline",
           "foreground": "#81a1c1",
-          "template": "[ {{ .Full }}]"
+          "template": "[React  {{ .Full }}]"
         },
         {
           "type": "svelte",
           "style": "powerline",
           "foreground": "#000000",
-          "template": "[ {{ .Full }}]"
+          "template": "[Svelte  {{ .Full }}]"
         },
         {
           "type": "talosctl",
@@ -272,8 +272,8 @@
         {
           "type": "tauri",
           "style": "powerline",
-          "foreground": "#000000",
-          "template": "[ {{ .Full }}]"
+          "foreground": "#E0D912",
+          "template": "[Tauri  {{ .Full }}]"
         },
         {
           "type": "terraform",
@@ -284,7 +284,7 @@
         {
           "type": "unity",
           "style": "powerline",
-          "foreground": "#111111",
+          "foreground": "#FFFFFF",
           "properties": {
             "http_timeout": 2000
           }
@@ -299,10 +299,11 @@
           "type": "yarn",
           "style": "powerline",
           "foreground": "#FFFFFF",
-          "template": "[󰄛 {{ .Full }}]"
+          "template": "[Yarn 󰄛 {{ .Full }}]"
         }
       ],
-      "type": "prompt"
+      "type": "prompt",
+      "newline": true
     },
     {
       "alignment": "left",
@@ -317,7 +318,7 @@
           "type": "session",
           "style": "plain",
           "foreground": "#F70202",
-          "template": "{{ if .Root }}Root&> {{ end }}"
+          "template": "{{ if .Root }}$Root&> {{ end }}"
         },
         {
           "type": "session",
