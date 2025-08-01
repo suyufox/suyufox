@@ -127,7 +127,7 @@
     {
       "alignment": "left",
       "segments": [
-      {
+        {
           "type": "project",
           "style": "powerline",
           "foreground": "#F0B120",
