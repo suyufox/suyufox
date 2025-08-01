@@ -2,6 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "final_space": true,
   "version": 3,
+  "console_title_template": "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}",
   "blocks": [
     {
       "alignment": "left",
@@ -26,6 +27,15 @@
           "type": "time"
         },
         {
+          "foreground": "#F1BD5C",
+          "properties": {
+            "time_format": "Monday"
+          },
+          "style": "plain",
+          "template": "[{{ .CurrentDate | date .Format }}]",
+          "type": "time"
+        },
+        {
           "type": "shell",
           "style": "plain",
           "foreground": "#E06C75",
@@ -37,7 +47,7 @@
               "bash": "Bash"
             }
           },
-          "template": " \ue795 {{ .Name }}"
+          "template": "[\ue795 {{ .Name }} {{ .Version }}]"
         },
         {
           "foreground": "#F3C267",
@@ -60,6 +70,241 @@
       "type": "prompt"
     },
     {
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "sysinfo",
+          "foreground": "#ffffff",
+          "template": "[Cpu: {{ round .PhysicalPercentUsed .Precision }}%]",
+          "properties": {
+            "precision": 2
+          },
+          "style": "powerline"
+        },
+        {
+          "type": "sysinfo",
+          "foreground": "#ffffff",
+          "template": "[RAM: {{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1048576.0) }}/{{ (div .PhysicalTotalMemory 1048576.0) }}MB({{round .PhysicalPercentUsed .Precision}}%)]",
+          "properties": {},
+          "style": "diamond"
+        },
+        {
+          "type": "battery",
+          "style": "powerline",
+          "foreground": "#08AB1B",
+          "template": "[{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}%]",
+          "properties": {
+            "discharging_icon": " ",
+            "charging_icon": " ",
+            "charged_icon": " "
+          }
+        },
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "#b8ff75",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#E06C75{{ end }}"
+          ],
+          "template": "[x{{ reason .Code }}]"
+        },
+        {
+          "foreground": "#b8ff75",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#E06C75{{ end }}"
+          ],
+          "properties": {
+            "style": "roundrock",
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": "[{{ .FormattedMs }}]",
+          "type": "executiontime"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "segments": [
+      {
+          "type": "project",
+          "style": "powerline",
+          "foreground": "#F0B120",
+          "template": "[{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}{{ .Name }}{{ end }}@{{ if .Version }}{{.Version}}{{ end }}{{ end }}  {{ if .Type }}{{ .Type }}{{ end }}]"
+        },
+        {
+          "type": "angular",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "argocd",
+          "style": "powerline",
+          "foreground": "#ffffff",
+          "template": "[{{ .Name }}:{{ .User }}@{{ .Server }}]"
+        },
+        {
+          "type": "aurelia",
+          "style": "powerline",
+          "foreground": "#ffffff",
+          "template": "[α {{ .Full }}]"
+        },
+        {
+          "type": "bazel",
+          "style": "powerline",
+          "foreground": "#ffffff"
+        },
+        {
+          "type": "buf",
+          "style": "plain",
+          "foreground": "#1000D6",
+          "template": "[🐃 {{ .Full }}]"
+        },
+        {
+          "type": "bun",
+          "style": "plain",
+          "foreground": "#3C82F6",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "cmake",
+          "style": "powerline",
+          "foreground": "#E8EAEE",
+          "template": "[  cmake {{ .Full }}]"
+        },
+        {
+          "type": "deno",
+          "style": "plain",
+          "foreground": "#3C82F6",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "docker",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[ {{ .Context }}]"
+        },
+        {
+          "type": "firebase",
+          "style": "powerline",
+          "foreground": "#ffffff",
+          "template": "[󰥧 {{ .Project }}]"
+        },
+        {
+          "type": "flutter",
+          "style": "powerline",
+          "foreground": "#ffffff",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "foreground": "#100e23",
+          "template": "[Helm {{ .Version }}]",
+          "style": "powerline",
+          "type": "helm"
+        },
+        {
+          "type": "kubectl",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}]",
+          "properties": {
+            "context_aliases": {
+              "arn:aws:eks:eu-west-1:1234567890:cluster/posh": "posh"
+            }
+          }
+        },
+        {
+          "type": "mvn",
+          "style": "powerline",
+          "foreground": "#FFFFFF",
+          "template": "[Maven {{ .Full }}]"
+        },
+        {
+          "type": "nix-shell",
+          "style": "powerline",
+          "foreground": "blue",
+          "template": "[(nix-{{ .Type }})]"
+        },
+        {
+          "type": "npm",
+          "style": "powerline",
+          "foreground": "#193549",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "nx",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "pnpm",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[󰋁 {{ .Full }}]"
+        },
+        {
+          "type": "quasar",
+          "style": "powerline",
+          "foreground": "#00B4FF",
+          "template": "[ {{.Full}}{{ if .HasVite }}  {{ .Vite.Version }}{{ end }}]"
+        },
+        {
+          "type": "react",
+          "style": "powerline",
+          "foreground": "#81a1c1",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "svelte",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "talosctl",
+          "style": "powerline",
+          "foreground": "#FFFFFF",
+          "template": "[󱃾 {{ .Context }}]"
+        },
+        {
+          "type": "tauri",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[ {{ .Full }}]"
+        },
+        {
+          "type": "terraform",
+          "style": "powerline",
+          "foreground": "#000000",
+          "template": "[{{.WorkspaceName}}]"
+        },
+        {
+          "type": "unity",
+          "style": "powerline",
+          "foreground": "#111111",
+          "properties": {
+            "http_timeout": 2000
+          }
+        },
+        {
+          "type": "xmake",
+          "style": "powerline",
+          "foreground": "#e0f2f1",
+          "template": "[xmake v{{ .Full }}]"
+        },
+        {
+          "type": "yarn",
+          "style": "powerline",
+          "foreground": "#FFFFFF",
+          "template": "[󰄛 {{ .Full }}]"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
       "alignment": "left",
       "newline": true,
       "segments": [
@@ -71,13 +316,20 @@
         {
           "type": "session",
           "style": "plain",
-          "template": "{{ if .Root }} "
+          "foreground": "#F70202",
+          "template": "{{ if .Root }}Root&> {{ end }}"
         },
-
         {
           "type": "session",
           "style": "plain",
-          "template": "{{ .UserName }}@{{ .HostName }}"
+          "foreground": "#30E52D",
+          "template": "{{ .UserName }}"
+        },
+        {
+          "type": "session",
+          "style": "plain",
+          "foreground": "#E2BC01",
+          "template": "@{{ .HostName }}>"
         },
         {
           "foreground": "#61AFEF",
@@ -85,7 +337,7 @@
             "style": "full"
           },
           "style": "plain",
-          "template": "\ue5ff {{ .Path }}",
+          "template": " \ue5ff {{ .Path }}",
           "type": "path"
         }
       ],
